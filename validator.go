@@ -99,7 +99,7 @@ func Validate(sentence string) ValidationResult {
 	// negativa ("The cat was not Brown.") también calza de forma laxa
 	// con la ER afirmativa (compl acepta "not Brown" como complemento),
 	// así que la más específica debe evaluarse primero.
-	if m := reLooseNegative.FindStringSubmatch(sentence); m != nil {
+	if m := reLooseNegative.FindStringSubmatch(sentence); m != nil { //FindStringSubmatch FindStringSubmatch
 		return ValidationResult{false, "Invalid: this is a negative sentence ('" + m[1] +
 			" " + m[2] + " not ...'). This project only accepts the affirmative form."}
 	}
@@ -117,7 +117,7 @@ func Validate(sentence string) ValidationResult {
 		return ValidationResult{false, "Invalid: this is in present tense ('" + m[2] +
 			"'). This project only accepts the past tense (was/were)."}
 	}
-	if reLooseQuestion.MatchString(sentence) {
+	if reLooseQuestion.MatchString(sentence) { //aqui usamos MatchString para ver si una cadena de texto coincide con la expresión regular esto devuelve true o false
 		return ValidationResult{false, "Invalid: this is a question. This project only accepts affirmative statements."}
 	}
 
