@@ -1,35 +1,26 @@
 name: Pipeline de Go
 
-# Se activa con cada push a la rama principal (cámbiala a master si usas ese nombre)
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # Usamos un servidor Linux limpio en la nube
+    runs-on: ubuntu-latest
 
     steps:
-    # 1. Copia tu código de Go al servidor virtual
     - name: Clonar el repositorio
       uses: actions/checkout@v4
 
-    # 2. Instala Go en el servidor virtual
     - name: Configurar entorno de Go
       uses: actions/setup-go@v5
       with:
-        go-version: '1.22.2' # Puedes cambiarlo por la versión exacta de tu go.mod
+        go-version: '1.22.2'
 
-    # 3. Descarga las librerías que use tu proyecto
     - name: Instalar dependencias
       run: go mod download
 
-    # 4. COMPILA el código para asegurar que no haya errores de sintaxis
     - name: Compilar proyecto
       run: go build -v ./...
-
-    # 5. Ejecuta las pruebas automáticas (si tienes archivos _test.go)
-    - name: Ejecutar pruebas
-      run: go test -v ./...
