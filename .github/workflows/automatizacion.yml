@@ -1,0 +1,17 @@
+name: Mi primera Automatizacion
+
+#2. El disparador 
+on:
+  push:
+    branches: [ main ] # se activa cuando haces push a la rama main
+
+jobs:
+  saludar:
+    runs-on: ubuntu-latest # aqui le estamos pidiendo a github una computadora con linux gratis
+
+    steps:
+      - name: Paso 1 - Saludar en consola
+        run: echo "Hola! Estoy ejecutandome de forma automatica en la nube."
+      
+      - name: Paso 2 - Mostrar la fecha actual
+        run: date
